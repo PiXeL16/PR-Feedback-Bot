@@ -1,0 +1,9 @@
+{
+    "env": {
+        "APP_ID": "13921",
+        "WEBHOOK_SECRET": "49494949",
+        "NODE_ENV": "production",
+        "LOG_LEVEL": "info",
+        "PRIVATE_KEY": "@private-key"
+        }
+}
