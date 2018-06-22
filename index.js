@@ -1,6 +1,5 @@
 module.exports = robot => {
   robot.on('pull_request.opened', async context => {
-      robot.log("New PR Open")
       // Get all issues for repo with user as creator
       // const response = await context.github.issues.getForRepo(context.repo({
       //     state: 'all',
@@ -24,7 +23,6 @@ module.exports = robot => {
   })
 
   robot.on('pull_request.closed', async context => {
-    robot.log("PR Closed")
     if (context.payload.pull_request.merged) {
       // const creator = context.payload.pull_request.user.login
       // const {owner, repo} = context.repo()
