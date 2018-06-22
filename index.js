@@ -1,5 +1,6 @@
-module.exports = app => {
+module.exports = robot => {
   robot.on('pull_request.opened', async context => {
+      robot.log("New PR Open")
       // Get all issues for repo with user as creator
       // const response = await context.github.issues.getForRepo(context.repo({
       //     state: 'all',
@@ -12,7 +13,7 @@ module.exports = app => {
       try {
           const config = await context.config('config.yml');
           if (config.newPRComment) {
-              context.github.issues.createComment(context.issue({body: config.newPRWelcomeComment}));
+              context.github.issues.createComment(context.issue({body: config.newPRComment}));
           }
       } catch (err) {
           if (err.code !== 404) {
@@ -23,6 +24,7 @@ module.exports = app => {
   })
 
   robot.on('pull_request.closed', async context => {
+    robot.log("PR Closed")
     if (context.payload.pull_request.merged) {
       // const creator = context.payload.pull_request.user.login
       // const {owner, repo} = context.repo()
@@ -34,7 +36,7 @@ module.exports = app => {
         try {
           const config = await context.config('config.yml')
           if (config.PRMergeComment) {
-            context.github.issues.createComment(context.issue({body: config.firstPRMergeComment}))
+            context.github.issues.createComment(context.issue({body: config.PRMergeComment}))
           }
         } catch (err) {
           if (err.code !== 404) {
